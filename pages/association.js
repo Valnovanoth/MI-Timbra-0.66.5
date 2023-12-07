@@ -51,6 +51,7 @@ export default function AssociationPage({ navigation }) {
   }, []);
 
   const requestAssociation = () => {
+    //debugger;
     if (!name) return Alert.alert("", "Inserire il nome.");
     if (!surname) return Alert.alert("", "Inserire il cognome.");
     //if (!password) return Alert.alert("", "Inserire la password.");
@@ -99,7 +100,8 @@ export default function AssociationPage({ navigation }) {
     return ret;
   };
   const checkIsAssociationRequested = () => {
-    if (!deviceId) return Alert.alert("", "Errore su DeviceCode.");
+    //debugger;
+    if (!deviceId) return Alert.alert("", "Errore su DeviceCode - checkIsAssociationRequested.");
     let body = {
       deviceId,
     };
