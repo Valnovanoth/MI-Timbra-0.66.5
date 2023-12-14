@@ -16,7 +16,8 @@ import {
 
 export default function PolicyModal () {
     const state = useContext(StateContext);
-    const [deviceId, setDeviceId] = useState(state.deviceId._z);
+    const [deviceId, setDeviceId] = useState(state.deviceId);
+    //const [deviceId, setdeviceId] = useState(state.deviceId._z);
     const [isConsentGiven, setIsConsentGiven] = useState(true);
     const [isDeviceRegistered, setIsDeviceRegistered] = useState(false);
 
@@ -25,7 +26,8 @@ export default function PolicyModal () {
     const [policyText, setPolicyText] = useState("Informativa");
 
     useEffect(() => {
-        setDeviceId(state.deviceId._z);
+        setDeviceId(state.deviceId);
+        //setdeviceId(state.deviceId._z);
         //setIsConsentGiven(state.isConsentGiven);        
     }, [state]);
 
@@ -111,7 +113,7 @@ export default function PolicyModal () {
 
     const giveConsent = () => {
         let body = {
-            deviceId,      
+            "deviceId": deviceId,
         };
 
         let ret = fetch(WS_GIVE_CONSENT, {

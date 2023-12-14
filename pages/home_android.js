@@ -62,7 +62,8 @@ export default function HomePageAndroid({ navigation }) {
   const [password, setPassword] = useState(null);
   const [badgeCode, setBadgeCode] = useState(null);
   const [costCode, setCostCode] = useState(null);
-  const [deviceId, setDeviceId] = useState(state.deviceId._z);
+  const [deviceId, setDeviceId] = useState(state.deviceId);
+  //const [deviceId, setdeviceId] = useState(state.deviceId._z);
   const [isInRegion, setIsInRegion] = useState(false);
   const [isInGateRegion, setIsInGateRegion] = useState(false);
   const [lastBestBeacon, setLastBestBeacon] = useState(null);
@@ -76,7 +77,8 @@ export default function HomePageAndroid({ navigation }) {
     setName(state.user.name);
     setSurname(state.user.surname);
     setPassword(state.user.password);
-    setDeviceId(state.deviceId._z);
+    setDeviceId(state.deviceId);
+    //setdeviceId(state.deviceId._z); // only because we need to access the property and send it to badge
     setBadgeCode(state.badgeCode);
     //setCostCode(state.lastCostCode);
     //console.log("Last cost code : " + state.lastCostCode);
@@ -412,13 +414,13 @@ export default function HomePageAndroid({ navigation }) {
     }
 
     let body = {
-      name,
-      surname,
-      password,
-      badgeCode,
-      costCode,
-      deviceId,
-      type,
+      "name": name,
+      "surname": surname,
+      "password": password,
+      "badgeCode": badgeCode,
+      "costCode": costCode,
+      "deviceId": deviceId,
+      "type": type,
     };
 
     if (lastBestBeacon) {
@@ -506,12 +508,12 @@ export default function HomePageAndroid({ navigation }) {
     }*/
 
     let body = {
-      name,
-      surname,
-      password,
-      badgeCode,
-      costCode,
-      deviceId,
+      "name": name,
+      "surname": surname,
+      "password": password,
+      "badgeCode": badgeCode,
+      "costCode": costCode,
+      "deviceId": deviceId,
     };
 
     let gateBeacon = {

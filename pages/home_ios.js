@@ -57,7 +57,7 @@ export default function HomePageIos({ navigation }) {
   const [password, setPassword] = useState(null);
   const [badgeCode, setBadgeCode] = useState(null);
   const [costCode, setCostCode] = useState(null);
-  const [deviceId, setDeviceId] = useState(state.deviceId._z);
+  const [deviceId, setDeviceId] = useState(state.deviceId);
   const [isInRegion, setIsInRegion] = useState(false);
   const [isInGateRegion, setIsInGateRegion] = useState(false);
   const [lastBestBeacon, setLastBestBeacon] = useState(null);
@@ -71,7 +71,7 @@ export default function HomePageIos({ navigation }) {
     setName(state.user.name);
     setSurname(state.user.surname);
     setPassword(state.user.password);
-    setDeviceId(state.deviceId._z);
+    setDeviceId(state.deviceId);
     setBadgeCode(state.badgeCode);
     //setCostCode(state.lastCostCode);
   }, [state]);

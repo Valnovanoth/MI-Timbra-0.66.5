@@ -19,14 +19,16 @@ import {
 
 export default function LoginModal () {
     const state = useContext(StateContext);
-    const [deviceId, setDeviceId] = useState(state.deviceId._z);
+    const [deviceId, setDeviceId] = useState(state.deviceId);
+    //const [deviceId, setdeviceId] = useState(state.deviceId._z);
     const [isDeviceRegistered, setIsDeviceRegistered] = useState(false); // se non è ancora registrato, non mostro il popup Login / Register
     const [loggedIn, setIsLoggedIn] = useState(false); // non è loggato
     const [hasPassword, setHasPassword] = useState(true); // se la ha gia fa Login, altrimenti Register    
     const [password, setPassword] = useState(null);
 
     useEffect(() => {
-        setDeviceId(state.deviceId._z);
+        setDeviceId(state.deviceId);
+        //setdeviceId(state.deviceId._z);
         //setPassword(state.user.password);
         //setHasPassword(state.isConsentGiven);        
     }, [state]);
@@ -141,7 +143,7 @@ export default function LoginModal () {
 
     const forgotPassword = () => {
         let body = {
-            deviceId,      
+            "deviceId": deviceId,
         };
 
         let ret = fetch(WS_FORGOT_PASSWORD, {
@@ -177,8 +179,8 @@ export default function LoginModal () {
     
     const register = (password) => {
         let body = {
-            deviceId,  
-            password,    
+            "deviceId": deviceId,
+            "password": password,
         };
 
         let ret = fetch(WS_REGISTER, {
@@ -216,8 +218,8 @@ export default function LoginModal () {
 
     const login = (password) => {
         let body = {
-            deviceId,    
-            password,  
+            "deviceId": deviceId,
+            "password": password,
         };
 
         let ret = fetch(WS_LOGIN, {

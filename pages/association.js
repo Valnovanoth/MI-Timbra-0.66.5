@@ -30,7 +30,8 @@ export default function AssociationPage({ navigation }) {
   const [surname, setSurname] = useState(null);
   const [password, setPassword] = useState(null);
   const [badgeCode, setBadgeCode] = useState(null);
-  const [deviceId, setDeviceId] = useState(state.deviceId._z);
+  const [deviceId, setDeviceId] = useState(state.deviceId);
+  //const [deviceId, setdeviceId] = useState(state.deviceId._z);
   const [isCheckingBadgeCode, setIsCheckingBadgeCode] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [isAssociationRequested, setIsAssociationRequested] = useState(false);
@@ -40,7 +41,8 @@ export default function AssociationPage({ navigation }) {
     setName(state.user.name);
     setSurname(state.user.surname);
     setPassword(state.user.password);
-    setDeviceId(state.deviceId._z);
+    setDeviceId(state.deviceId);
+    //setdeviceId(state.deviceId._z); // only because we need to access the property and send it to register
     setBadgeCode(state.badgeCode);
   }, [state]);
 
@@ -51,18 +53,18 @@ export default function AssociationPage({ navigation }) {
   }, []);
 
   const requestAssociation = () => {
-    //debugger;
     if (!name) return Alert.alert("", "Inserire il nome.");
     if (!surname) return Alert.alert("", "Inserire il cognome.");
     //if (!password) return Alert.alert("", "Inserire la password.");
     if (!deviceId) return Alert.alert("", "Errore su DeviceCode.");
+
     let body = {
-      name,
-      surname,
-      password,
-      deviceId,
+      "name": name,
+      "surname": surname,
+      "password": password,
+      "deviceId": deviceId,
     };
-    
+
     let ret = fetch(WS_REQUEST_ASSOCIATION, {
       method: "POST",
       headers: new Headers({ "Content-Type": "application/json" }),
@@ -100,11 +102,12 @@ export default function AssociationPage({ navigation }) {
     return ret;
   };
   const checkIsAssociationRequested = () => {
-    //debugger;
     if (!deviceId) return Alert.alert("", "Errore su DeviceCode - checkIsAssociationRequested.");
+
     let body = {
-      deviceId,
+      "deviceId": deviceId,
     };
+
     let ret = fetch(WS_CHECK_ASSOCIATION_REQUESTED, {
       method: "POST",
       headers: new Headers({ "Content-Type": "application/json" }),
@@ -141,8 +144,9 @@ export default function AssociationPage({ navigation }) {
   const getBadgeCode = () => {
     setRefreshing(true);
     setIsCheckingBadgeCode(true);
+
     let body = {
-      deviceId: deviceId,
+      "deviceId": deviceId,
     };
     let ret = fetch(WS_BADGE_CODE, {
       method: "POST",
