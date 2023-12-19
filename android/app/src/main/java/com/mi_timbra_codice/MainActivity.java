@@ -1,4 +1,4 @@
-package com.mi_timbra_codice;
+package com.mi_timbra;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -60,7 +60,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "mi_timbra_codice";
+    return "mi_timbra";
   }
 
   /**

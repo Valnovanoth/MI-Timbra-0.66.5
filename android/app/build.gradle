@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.mi_timbra_codice"
+    namespace "com.mi_timbra"
     defaultConfig {
-        applicationId "com.mi_timbra_codice"
+        applicationId "com.mi_timbra"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 6

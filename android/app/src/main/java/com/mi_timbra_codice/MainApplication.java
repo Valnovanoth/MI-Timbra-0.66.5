@@ -1,4 +1,4 @@
-package com.mi_timbra_codice;
+package com.mi_timbra;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
