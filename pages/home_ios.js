@@ -560,7 +560,7 @@ export default function HomePageIos({ navigation }) {
                     />
                   )}
 
-                  {/* // DEBUG POSIZIONE */}
+                  {/* // DEBUG POSIZIONE
                   {false ? <Text>{JSON.stringify(location)}</Text> : null}
                   {location ? (
                     <View>
@@ -582,6 +582,7 @@ export default function HomePageIos({ navigation }) {
                       />
                     </View>
                   ) : null}
+                  */}
                 </View>
               )}
               <View>

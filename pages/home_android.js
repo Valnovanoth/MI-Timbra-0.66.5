@@ -708,7 +708,7 @@ export default function HomePageAndroid({ navigation }) {
                     />
                   )}
 
-                  {/* // DEBUG POSIZIONE */}
+                  {/* // DEBUG POSIZIONE
                   {false ? <Text>{JSON.stringify(location)}</Text> : null}
                   {location ? (
                     <View>
@@ -728,6 +728,7 @@ export default function HomePageAndroid({ navigation }) {
                       />
                     </View>
                   ) : null}
+                  */}
                 </View>
               )}
               <View>
