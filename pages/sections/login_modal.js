@@ -10,6 +10,7 @@ import { StateContext } from "../../provider/provider";
 
 import {
   WS_HAS_PASSWORD,
+  WS_CHECK_PENDING_DELETION,
   WS_GET_PASSWORD,
   WS_FORGOT_PASSWORD,
   WS_IS_DEVICE_REGISTERED,
@@ -23,7 +24,8 @@ export default function LoginModal () {
     //const [deviceId, setdeviceId] = useState(state.deviceId._z);
     const [isDeviceRegistered, setIsDeviceRegistered] = useState(false); // se non è ancora registrato, non mostro il popup Login / Register
     const [loggedIn, setIsLoggedIn] = useState(false); // non è loggato
-    const [hasPassword, setHasPassword] = useState(true); // se la ha gia fa Login, altrimenti Register    
+    const [hasPassword, setHasPassword] = useState(true); // se la ha gia fa Login, altrimenti Register
+    const [alertOnModal, setAlertOnModal] = useState(false);
     const [password, setPassword] = useState(null);
 
     useEffect(() => {
@@ -228,12 +230,15 @@ export default function LoginModal () {
         headers: new Headers({ "Content-Type": "application/json" }),
     })
         .then((resp) => {
+            //debugger;
             switch (resp.status) {
                 case 200:
                     return resp.json();
                     break;
                 default:
                     Alert.alert("Errore", "Questo account non esiste più.");
+                    /*setAlertOnModal(true);
+                    setTimeout(() => Alert.alert("Errore", "Questo account non esiste più."), 10);*/
                     break;
             }
         })
@@ -263,7 +268,6 @@ export default function LoginModal () {
 			}
 		})
         .then(transactions => {
-            //!!! debugger;
 			if (transactions.data[0].login) {
 				setIsLoggedIn(true);
 			}
@@ -287,7 +291,7 @@ export default function LoginModal () {
 
     return (
         <>
-            {hasPassword ? (
+            {hasPassword && !alertOnModal ? (
             <>
                 <Modal
                     visible={isDeviceRegistered && !loggedIn} 
