@@ -216,46 +216,74 @@ export default function LoginModal () {
         return ret;
     };    
 
-    const login = (password) => {
-        let body = {
-            "deviceId": deviceId,
-            "password": password,
-        };
+  const login = async (password) => {
+	let body = {
+		"deviceId": deviceId,
+		"password": password,
+	};
 
-        let ret = fetch(WS_LOGIN, {
-            method: "POST",
-            headers: new Headers({ "Content-Type": "application/json" }),
-            body: JSON.stringify(body),            
+    // CHECK IF THE ACCOUNT IS ENABLED OR CANCELED (
+    let ret = await fetch(WS_CHECK_PENDING_DELETION + "?deviceId=" + deviceId, {
+        method: "GET",
+        headers: new Headers({ "Content-Type": "application/json" }),
+    })
+        .then((resp) => {
+            switch (resp.status) {
+                case 200:
+                    return resp.json();
+                    break;
+                default:
+                    Alert.alert("Errore", "Questo account non esiste più.");
+                    break;
+            }
         })
-            .then((resp) => {
-                switch (resp.status) {
-                    case 200:
-                        //setHasPassword(true);
-                        return resp.json();
-                        break;
-                    default:
-                        Alert.alert("Errore", "Errore di sistema, riprova più tardi.");
-                        break;
-                }
-            })
-            .then((data) => {
-                if (data[0].login) {
-                    setIsLoggedIn(true);
-                }
-                //setAssociationRequest({ id: data.requestId });
-                /*Alert.alert(
-                    "Associazione",
-                    "Richiesta eseguita con id: " + data.requestId
-                );
-                }
-                if (data.requestId == 0)
-                Alert.alert("Associazione", "Richiesta in lavorazione.");*/
-            })          
-            .catch((e) => {
-                setHasPassword(false);
-            });
-        return ret;
-    };
+        /*.then((data) => {
+            body.nonce = data[0].nonce;
+            console.log(data[0].nonce);
+            debugger;
+        })*/
+        .catch((e) => {
+            console.log(e);
+        });
+
+    let transactions = await fetch(WS_LOGIN, {
+         method: "POST",
+         headers: new Headers({ "Content-Type": "application/json" }),
+         body: JSON.stringify(body),
+     })
+		.then((resp) => {
+			switch (resp.status) {
+				case 200:
+					//setHasPassword(true);
+					return resp.json();
+					break;
+				default:
+					Alert.alert("Errore", "Errore di sistema, riprova più tardi.");
+					break;
+			}
+		})
+        .then(transactions => {
+            //!!! debugger;
+			if (transactions.data[0].login) {
+				setIsLoggedIn(true);
+			}
+			//setAssociationRequest({ id: data.requestId });
+			/*Alert.alert(
+				"Associazione",
+				"Richiesta eseguita con id: " + data.requestId
+			);
+			}
+			if (data.requestId == 0)
+			Alert.alert("Associazione", "Richiesta in lavorazione.");*/
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+    /*.then((data) => {
+        body.nonce = data.nonce;
+        console.log(data.nonce);
+    })*/
+  };
 
     return (
         <>

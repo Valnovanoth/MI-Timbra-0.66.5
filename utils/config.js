@@ -24,6 +24,7 @@ export const WS_GATE_OPEN = `http://${host}:${port}/openGate`;
 export const WS_IS_DEVICE_REGISTERED = `http://${host}:${port}/isDeviceRegistered`;
 
 export const WS_REGISTER = `http://${host}:${port}/register`;
+export const WS_CHECK_PENDING_DELETION = `http://${host}:${port}/checkPendingDeletion`;
 export const WS_LOGIN = `http://${host}:${port}/login`;
 
 // true to enable debug alerts

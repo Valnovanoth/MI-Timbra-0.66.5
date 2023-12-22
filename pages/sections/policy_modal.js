@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
-import { StyleSheet, Modal, Text, View, Button } from "react-native";
+import { StyleSheet, Modal, Text, View, Button, ScrollView } from "react-native";
 //import { Modal, ModalTitle, ModalContent } from 'react-native-modals';
 
 import RNExitApp from 'react-native-exit-app';
@@ -7,6 +7,8 @@ import RNExitApp from 'react-native-exit-app';
 //import { policyStyles } from "../launch";
 
 import { StateContext } from "../../provider/provider";
+
+//! import { PolicyText } from "./inner/policy_text";
 
 import {
   WS_GIVE_CONSENT,
@@ -23,7 +25,7 @@ export default function PolicyModal () {
 
     // Controllo testi e pulsanti navigazione popup policy
     const [policyIsFirstPage, setPolicyIsFirstPage] = useState(true);
-    const [policyText, setPolicyText] = useState("Informativa");
+    //const [policyText, setPolicyText] = useState("Informativa");
 
     useEffect(() => {
         setDeviceId(state.deviceId);
@@ -39,9 +41,6 @@ export default function PolicyModal () {
 
     const policySecondPage = () => {
         setPolicyIsFirstPage(false);
-        setPolicyText("Preso atto di quanto indicato nella precedente informativa," +
-           " autorizzo in modo esplicito il trattamento dei miei dati personali" +
-           " per l’elaborazione, ai fini della gestione delle timbrature");
     }
 
     const checkDeviceRegistered = () => {                
@@ -164,9 +163,100 @@ export default function PolicyModal () {
                         {/** HR */}
                         <View style={policyStyles.hairline} />
                         {/** HR */}
-                        <Text style={policyStyles.subtitle}>
-                            {policyText}
-                        </Text>
+                        <ScrollView style={policyStyles.scrollcontainer}>
+                            {policyIsFirstPage ? (
+                                <View>
+                                      <Text style={[policyStyles.scrolltitle]}>
+                                            **INFORMATIVA SULLA PRIVACY PER LA GEOLOCALIZZAZIONE (ART. 13 GDPR)**
+                                      </Text>
+                                      <Text style={[policyStyles.subtitle]}>
+                                            La presente Informativa sulla Privacy è destinata a informare l'utente sulle
+                                            modalità di raccolta e utilizzo dei dati di geolocalizzazione da parte della
+                                            nostra società, Meridionale Impianti SPA, in conformità con il Regolamento
+                                            Generale sulla Protezione dei Dati (GDPR).
+                                      </Text>
+                                      <Text style={[policyStyles.scrolltitle]}>
+                                            1. **IDENTITÀ E DETTAGLI DI CONTATTO DEL TITOLARE DEL TRATTAMENTO**
+                                      </Text>
+                                      <Text style={[policyStyles.subtitle]}>
+                                            Il titolare del trattamento è Meridionale Impianti SPA, con sede in
+                                            Bivio Aspro SN - Belpasso - 95032 Catania, Italia.
+                                            Per qualsiasi domanda, si prega di contattare segreteria@merimp.com
+                                            o ufficio.personale@merimp.com
+                                      </Text>
+                                      <Text style={[policyStyles.scrolltitle]}>
+                                            2. **FINALITÀ DEL TRATTAMENTO E BASE GIURIDICA**
+                                      </Text>
+                                      <Text style={[policyStyles.subtitle]}>
+                                            I dati di geolocalizzazione vengono raccolti e utilizzati per fornire servizi
+                                            personalizzati e migliorare l'esperienza dell'utente. La base giuridica per il
+                                            trattamento è il consenso dell'utente.
+                                      </Text>
+                                      <Text style={[policyStyles.scrolltitle]}>
+                                            3. **DESTINATARI O CATEGORIE DI DESTINATARI DEI DATI PERSONALI**
+                                      </Text>
+                                      <Text style={[policyStyles.subtitle]}>
+                                            I dati di geolocalizzazione non verranno condivisi con n	essun ente esterno,
+                                            sono di puro uso dell'aziend	a
+                                      </Text>
+                                      <Text style={[policyStyles.scrolltitle]}>
+                                            4. **TRASFERIMENTO DI DATI PERSONALI**
+                                      </Text>
+                                      <Text style={[policyStyles.subtitle]}>
+                                            I dati personali non vengono trasferiti al di fuori dell'Unione Europea.
+                                      </Text>
+                                      <Text style={[policyStyles.scrolltitle]}>
+                                            5. **PERIODO DI CONSERVAZIONE DEI DATI**
+                                      </Text>
+                                      <Text style={[policyStyles.subtitle]}>
+                                            I dati di geolocalizzazione saranno conservati fino alla cancellazione
+                                            dell'account da parte dell'utente, e dopo il loro processing da parte
+                                            dell'azienda
+                                      </Text>
+                                      <Text style={[policyStyles.scrolltitle]}>
+                                            6. **DIRITTI DELL'INTERESSATO**
+                                      </Text>
+                                      <Text style={[policyStyles.subtitle]}>
+                                            L'utente ha il diritto di accedere, rettificare, cancellare i propri dati
+                                            personali, limitare o opporsi al loro trattamento, diritto alla portabilità
+                                            dei dati, diritto di revocare il consenso, e diritto di proporre reclamo
+                                            a un'autorità di controllo.
+                                      </Text>
+                                      <Text style={[policyStyles.scrolltitle]}>
+                                            7. **NATURA OBBLIGATORIA O FACOLTATIVA DEL CONSENSO**
+                                      </Text>
+                                      <Text style={[policyStyles.subtitle]}>
+                                            La fornitura dei dati è facoltativa, ma la mancata fornitura dei dati può
+                                            limitare la capacità di fornire servizi personalizzati.
+                                      </Text>
+                                      <Text style={[policyStyles.scrolltitle]}>
+                                            8. **ESISTENZA DI UN PROCESSO DECISIONALE AUTOMATIZZATO**
+                                      </Text>
+                                      <Text style={[policyStyles.subtitle]}>
+                                               Non esiste un processo decisionale automatizzato, compresa la profilazione.
+                                      </Text>
+                                        <View
+                                          style={{
+                                            borderBottomColor: 'black',
+                                            borderBottomWidth: StyleSheet.hairlineWidth,
+                                            margin: 20
+                                          }}
+                                        />
+                                      <Text style={[policyStyles.subtitle]}>
+                                               Per ulteriori informazioni sul trattamento dei dati personali, si prega di
+                                               contattare segreteria@merimp.com o ufficio.personale@merimp.com
+                                      </Text>
+                                </View>
+                            ) : (
+                                <View>
+                                    <Text style={policyStyles.subtitle}>
+                                       Preso atto di quanto indicato nella precedente informativa,
+                                       autorizzo in modo esplicito il trattamento dei miei dati personali
+                                       per l’elaborazione, ai fini della gestione delle timbrature
+                                    </Text>
+                                </View>
+                            )}
+                        </ScrollView>
                         <View style={policyStyles.buttonHorizontal}>
                             {policyIsFirstPage ? (
                                 <>
@@ -205,6 +295,7 @@ const policyStyles = StyleSheet.create({
     },
     modalView: {
         marginVertical: 20,
+        height: '80%',
         backgroundColor: "white",
         borderRadius: 20,
         padding: 35,
@@ -221,10 +312,14 @@ const policyStyles = StyleSheet.create({
     },
     title: {
         fontWeight: "bold",
-        textAlign: "justify",
+        textAlign: "left",
         fontSize: 25,
         marginBottom: 10,
         color: "black"
+    },
+    scrolltitle: {
+        fontWeight: "bold",
+        fontSize: 20,
     },
     hairline: {
         backgroundColor: 'black',
