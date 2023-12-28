@@ -236,16 +236,13 @@ export default function LoginModal () {
                     return resp.json();
                     break;
                 default:
-                    Alert.alert("Errore", "Questo account non esiste più.");
-                    /*setAlertOnModal(true);
-                    setTimeout(() => Alert.alert("Errore", "Questo account non esiste più."), 10);*/
+                    //Alert.alert("Errore", "Questo account non esiste più.");
+                    setAlertOnModal(true);
+                    //setTimeout(() => Alert.alert("Errore", "Questo account non esiste più."), 10);
                     break;
             }
         })
         /*.then((data) => {
-            body.nonce = data[0].nonce;
-            console.log(data[0].nonce);
-            debugger;
         })*/
         .catch((e) => {
             console.log(e);
@@ -260,6 +257,7 @@ export default function LoginModal () {
 			switch (resp.status) {
 				case 200:
 					//setHasPassword(true);
+					setIsLoggedIn(true);
 					return resp.json();
 					break;
 				default:
@@ -291,7 +289,7 @@ export default function LoginModal () {
 
     return (
         <>
-            {hasPassword && !alertOnModal ? (
+            {hasPassword ? (
             <>
                 <Modal
                     visible={isDeviceRegistered && !loggedIn} 
@@ -300,6 +298,13 @@ export default function LoginModal () {
                 >
                     <View style={loginStyles.centeredView}>
                         <View style={loginStyles.modalView}>
+                            {alertOnModal ? (
+                                <Text style={loginStyles.alertText}>
+                                    Questo account è stato disabilitato!
+                                </Text>
+                            ) : (
+                                <></>
+                            )}
                             <Text style={loginStyles.title}>
                                 Login
                             </Text>                    
@@ -410,6 +415,12 @@ const loginStyles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
         width: '90%'
+    },
+    alertText: {
+        fontWeight: "bold",
+        fontSize: 18,
+        marginBottom: 10,
+        color: "black",
     },
     title: {
         fontWeight: "bold",
