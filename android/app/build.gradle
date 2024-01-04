@@ -78,8 +78,8 @@ android {
         applicationId "com.mi_timbra"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 61
-        versionName "6.1"
+        versionCode 62
+        versionName "6.2"
     }
     signingConfigs {
         debug {
@@ -116,6 +116,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"
     //implementation "androidx.work:work-runtime:2.8.1"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation "org.altbeacon:android-beacon-library:2+"
 
     // For Junit testing of project
     /*testImplementation 'junit:junit:4.13.2'

@@ -46,6 +46,13 @@
         </receiver>
 
         <service
+            android:name="org.altbeacon.beacon.service.CycledLeScanner"
+            android:enabled="true"
+            android:exported="false"
+            android:isolatedProcess="false"
+            android:label="beacon"
+            tools:replace="android:exported" />
+        <service
             android:name="org.altbeacon.beacon.service.BeaconService"
             android:enabled="true"
             android:exported="false"
